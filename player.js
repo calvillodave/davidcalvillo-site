@@ -257,7 +257,16 @@
         <video class="work-media" controls playsinline preload="none"${w.poster ? ` poster="${esc(w.poster)}"` : ""}>
           <source src="${esc(w.video)}" type="video/mp4">
         </video>${text}`;
-      li.querySelector("video").addEventListener("play", () => audio.pause());
+      const video = li.querySelector("video");
+      video.addEventListener("play", () => audio.pause());
+      // GitHub Pages sometimes answers a video request with an error. Retry once with a fresh URL.
+      li.querySelector("source").addEventListener("error", e => {
+        if (video.dataset.retried) return;
+        video.dataset.retried = "1";
+        e.target.src = w.video + "?retry=" + Date.now();
+        video.load();
+        video.play().catch(() => {});
+      });
     }
     workGrid.appendChild(li);
   });
