@@ -13,5 +13,11 @@
       "video": "videos/DavidCalvillo_VoicesofFosterPets.mp4",
       "poster": "videos/voices-of-foster-pets-poster.jpg"
     }
+  ],
+  "brands": [
+    {
+      "name": "Cricket Wireless",
+      "logo": "images/brands/cricket-wireless.svg"
+    }
   ]
 }

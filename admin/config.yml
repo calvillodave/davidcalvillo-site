@@ -75,6 +75,20 @@ collections:
                 required: false
                 media_folder: /videos
                 public_folder: videos
+          - label: Brands I've voiced for (logo row)
+            label_singular: Brand
+            name: brands
+            widget: list
+            required: false
+            hint: Drag to reorder. SVG or PNG logos with a transparent background look best.
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Brand name, name: name, widget: string }
+              - label: Logo
+                name: logo
+                widget: image
+                media_folder: /images/brands
+                public_folder: images/brands
 
       - name: settings
         label: Contact & socials

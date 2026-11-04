@@ -225,7 +225,15 @@
 
   const workGrid = document.getElementById("work-grid");
   const workItems = (work.items || []).filter(w => (w.type === "youtube" ? parseYouTube(w.youtube) : w.video));
-  if (!workItems.length) document.getElementById("work")?.remove();
+  const brands = (work.brands || []).filter(b => b.logo);
+  if (!workItems.length && !brands.length) document.getElementById("work")?.remove();
+
+  // Logo row of brands David has voiced for
+  if (brands.length) {
+    document.getElementById("brand-logos").innerHTML = brands.map(b =>
+      `<li><img src="${esc(b.logo)}" alt="${esc(b.name)}" title="${esc(b.name)}" loading="lazy"></li>`).join("");
+    document.getElementById("brands").hidden = false;
+  }
 
   workItems.forEach(w => {
     const li = document.createElement("li");
