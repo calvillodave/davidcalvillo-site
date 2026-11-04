@@ -1,0 +1,362 @@
+/* ============ Brand tokens ============ */
+/* David's palette: #8AF8C0 seafoam, #70CF9E mid green, #FFBACB blush, #FF90AC mid pink,
+   #FF6088 hot pink, with #4A7570 as the one dark green. */
+:root {
+  --berry: #D92A62;        /* deeper pink for text and thin lines (headline, logo heartbeat) */
+  --berry-deep: #B81F51;
+  --hot: #FF6088;          /* hot pink */
+  --hot-light: #FF90AC;    /* mid pink */
+  --rose: #FFBACB;         /* blush */
+  --evergreen: #4A7570;    /* the dark green: headings, logo bird */
+  --evergreen-deep: #4A7570;
+  --sage: #4A7570;
+  --mint: #8AF8C0;         /* seafoam */
+  --logo-mid: #3E9E70;
+  --glow-pink: #FFBACB;
+  --glow-green: #8AF8C0;
+  --photo-top: #FFBACB;
+  --photo-mid: #FF90AC;
+  --note-color: #4A7570;
+  --frost: #F7F5F2;        /* page background */
+  --ink: #1E2328;          /* body text */
+  --ink-soft: #4A5058;
+
+  /* Main buttons: hot pink with dark plum text */
+  --btn-bg: #FF6088;
+  --btn-text: #5A1230;
+  --btn-hover: #FF90AC;
+
+  /* Listen band: deep green with seafoam and pink glowing on it */
+  --band-bg: #4A7570;
+  --band-text: #fff;
+  --band-soft: rgba(255, 255, 255, 0.72);
+  --band-muted: #8AF8C0;
+  --band-card: rgba(255, 255, 255, 0.07);
+  --band-card-border: rgba(255, 255, 255, 0.14);
+  --band-card-shadow: 0 16px 36px -20px rgba(0, 0, 0, 0.5);
+  --band-tag-bg: rgba(138, 248, 192, 0.12);
+  --band-play: #FFFFFF;    /* white play buttons with a hot pink icon */
+  --band-play-text: #FF6088;
+  --band-play-hover: #FFE3EA;
+  --band-play-shadow: rgba(0, 0, 0, 0.45);
+  --band-bar: rgba(255, 255, 255, 0.22);
+  --band-bar-played: #FF90AC;
+  --band-chip-bg: rgba(255, 255, 255, 0.06);
+  --band-chip-border: rgba(255, 255, 255, 0.28);
+  --band-chip-on-bg: #8AF8C0;
+  --band-chip-on-text: #4A7570;
+  --band-glow-1: rgba(112, 207, 158, 0.25);
+  --band-glow-2: rgba(138, 248, 192, 0.14);
+  --play-pulse: rgba(255, 96, 136, 0.55);
+  --play-pulse-0: rgba(255, 96, 136, 0);
+
+  /* Contact card: blush-to-hot-pink with a seafoam button */
+  --contact-bg:
+    radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.45), transparent 45%),
+    linear-gradient(135deg, #FFBACB, #FF90AC 55%, #FF6088);
+  --contact-text: #5A1230;
+  --contact-soft: rgba(90, 18, 48, 0.85);
+  --contact-line: rgba(90, 18, 48, 0.2);
+  --contact-btn-bg: #8AF8C0;
+  --contact-btn-text: #4A7570;
+  --contact-btn-hover: #70CF9E;
+  --contact-chip-bg: rgba(255, 255, 255, 0.4);
+  --contact-chip-border: rgba(90, 18, 48, 0.3);
+  --contact-shadow: rgba(255, 96, 136, 0.7);
+
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --shadow: 0 10px 30px -12px rgba(74, 117, 112, 0.25), 0 2px 6px -2px rgba(30, 35, 40, 0.06);
+
+  /* Green bird, pink heartbeat. A quick switch keeps pink and green from mixing into mud. */
+  --logo-gradient: linear-gradient(180deg, var(--evergreen-deep) 0%, var(--logo-mid) 40%, var(--berry) 52%, var(--hot) 100%);
+  --logo-gradient-light: linear-gradient(180deg, #E4F4EC 0%, var(--mint) 40%, var(--hot-light) 52%, #FFA3C6 100%);
+
+  --radius: 22px;
+  --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--frost);
+  overflow-x: clip;
+}
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+a { color: var(--evergreen); }
+:focus-visible { outline: 3px solid var(--berry); outline-offset: 3px; border-radius: 8px; }
+
+/* Soft pink + green glows behind the glass */
+.glow {
+  position: fixed; z-index: -1; pointer-events: none;
+  width: 60vmax; height: 60vmax; border-radius: 50%;
+  filter: blur(90px); opacity: 0.6;
+}
+.glow-pink  { background: var(--glow-pink); top: -24vmax; right: -20vmax; }
+.glow-green { background: var(--glow-green); bottom: -28vmax; left: -24vmax; }
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* ============ Logo (the hummingbird, recolored to the brand) ============ */
+.logo {
+  display: inline-block;
+  aspect-ratio: 701 / 600;
+  background: var(--logo-gradient);
+  -webkit-mask: url("images/logo-mask.png") center / contain no-repeat;
+          mask: url("images/logo-mask.png") center / contain no-repeat;
+}
+.logo-small { width: 44px; }
+.logo-tiny  { width: 28px; opacity: 0.8; }
+.logo-hero  { width: min(340px, 72vw); filter: drop-shadow(0 10px 24px rgba(255, 96, 136, 0.25)); }
+
+/* Line "draws" in, then one gentle pulse */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-hero { animation: draw 1.6s cubic-bezier(.6,.1,.3,1) both, beat 0.9s ease-in-out 1.7s 1; }
+  @keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes beat { 0%,100% { transform: scale(1); } 20% { transform: scale(1.05); } 40% { transform: scale(0.99); } 60% { transform: scale(1.03); } }
+}
+
+/* ============ Header ============ */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px clamp(16px, 4vw, 40px);
+  background: rgba(247, 245, 242, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(74, 117, 112, 0.08);
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand-name { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; }
+.nav { display: flex; align-items: center; gap: clamp(10px, 3vw, 28px); }
+.nav a { text-decoration: none; color: var(--ink-soft); font-weight: 500; font-size: 0.95rem; }
+.nav a:hover { color: var(--berry); }
+.nav .nav-cta { color: var(--berry); }
+@media (max-width: 480px) {
+  .brand-name { display: none; }
+}
+
+/* ============ Layout ============ */
+main { max-width: 1080px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+.section { padding: clamp(56px, 9vw, 96px) 0; scroll-margin-top: 40px; }
+.section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 24px; }
+.section-head h2, .about h2, .contact h2 { font-size: clamp(2rem, 5vw, 2.8rem); color: var(--evergreen); }
+.section-head p { margin: 0; color: var(--ink-soft); }
+
+/* ============ Hero ============ */
+.hero { text-align: center; padding: clamp(40px, 8vw, 88px) 0 clamp(24px, 4vw, 40px); }
+.eyebrow { margin: 18px 0 10px; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); }
+.hero h1 { font-size: clamp(2.6rem, 8vw, 4.8rem); font-weight: 700; color: var(--ink); }
+.hero h1 .accent {
+  color: var(--berry);
+  background: linear-gradient(90deg, var(--berry), var(--hot));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lede { max-width: 34ch; margin: 18px auto 30px; font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: var(--ink-soft); }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+/* ============ Buttons ============ */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 24px; border-radius: 999px;
+  font: 600 1rem var(--font-body); text-decoration: none;
+  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.btn svg { width: 20px; height: 20px; fill: currentColor; }
+.btn-primary { background: var(--btn-bg); color: var(--btn-text); box-shadow: 0 8px 20px -8px rgba(255, 96, 136, 0.6); }
+.btn-primary:hover { background: var(--btn-hover); transform: translateY(-1px); }
+.btn-ghost { color: var(--evergreen); background: var(--glass); border: 1px solid rgba(74, 117, 112, 0.25); }
+.btn-ghost:hover { border-color: var(--evergreen); transform: translateY(-1px); }
+
+/* ============ Player ============ */
+.play {
+  flex: none; display: grid; place-items: center;
+  width: 52px; height: 52px; border: 0; border-radius: 50%;
+  background: var(--berry); color: #fff; cursor: pointer;
+  box-shadow: 0 6px 16px -6px rgba(255, 96, 136, 0.7);
+  transition: transform .15s ease, background .15s ease;
+}
+.play:hover { background: var(--berry-deep); transform: scale(1.06); }
+.play svg { width: 22px; height: 22px; fill: currentColor; }
+.play .i-pause { display: none; }
+.is-playing .play .i-play { display: none; }
+.is-playing .play .i-pause { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .is-playing .play { animation: pulse 1.1s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 var(--play-pulse); } 50% { box-shadow: 0 0 0 10px var(--play-pulse-0); } }
+}
+
+.wave {
+  display: flex; align-items: center; gap: 2px;
+  height: 40px; width: 100%; cursor: pointer; padding: 0; border: 0; background: none;
+}
+.wave span {
+  flex: 1; min-width: 2px; border-radius: 2px;
+  background: rgba(74, 117, 112, 0.22);
+  transition: background .1s linear;
+}
+.wave span.played { background: var(--berry); }
+
+.meta { display: flex; justify-content: space-between; gap: 12px; font-size: 0.82rem; color: var(--ink-soft); }
+.tag {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--evergreen); background: rgba(74, 117, 112, 0.14);
+  padding: 3px 10px; border-radius: 999px;
+}
+.missing .wave, .missing .play { opacity: 0.35; pointer-events: none; }
+.missing .time::after { content: " · coming soon"; }
+
+/* Featured (long narration) */
+.featured { display: grid; grid-template-columns: auto 1fr; gap: 18px 22px; align-items: center; padding: clamp(20px, 4vw, 32px); margin-bottom: 32px; }
+.featured .play { width: 72px; height: 72px; }
+.featured .play svg { width: 30px; height: 30px; }
+.featured h3 { font-size: clamp(1.35rem, 3vw, 1.7rem); }
+.featured p { margin: 4px 0 0; color: var(--ink-soft); }
+.featured .player-row { grid-column: 1 / -1; display: grid; gap: 6px; }
+.featured .wave { height: 56px; }
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.chip {
+  border: 1px solid rgba(74, 117, 112, 0.22); background: var(--glass);
+  color: var(--evergreen); font: 500 0.92rem var(--font-body);
+  padding: 8px 16px; border-radius: 999px; cursor: pointer;
+}
+.chip:hover { border-color: var(--evergreen); }
+.chip[aria-pressed="true"] { background: var(--evergreen); color: #fff; border-color: var(--evergreen); }
+
+/* Sample grid */
+.sample-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+.card { display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: center; padding: 16px; transition: transform .15s ease, box-shadow .15s ease; }
+.card:hover { transform: translateY(-2px); }
+.card h3 { font-size: 1.08rem; font-weight: 500; }
+.card .card-top { display: grid; gap: 6px; min-width: 0; }
+.card .player-row { grid-column: 1 / -1; display: grid; gap: 4px; }
+.card.is-playing, .featured.is-playing { border-color: rgba(255, 96, 136, 0.45); box-shadow: 0 12px 34px -12px rgba(255, 96, 136, 0.4); }
+.card[hidden] { display: none; }
+
+/* ============ Listen: full-width band ============ */
+/* Colors come from --band-* tokens so a palette can make it deep or light. */
+.band {
+  position: relative; color: var(--band-text);
+  background: var(--band-bg);
+  /* stretch the background edge to edge while content stays centered */
+  box-shadow: 0 0 0 100vmax var(--band-bg);
+  clip-path: inset(0 -100vmax);
+  margin-top: clamp(24px, 4vw, 48px);
+}
+.band::before, .band::after {
+  content: ""; position: absolute; pointer-events: none; border-radius: 50%; filter: blur(70px);
+}
+.band::before { width: 46vmax; height: 46vmax; top: -18vmax; right: -14vmax; background: var(--band-glow-1); }
+.band::after  { width: 40vmax; height: 40vmax; bottom: -20vmax; left: -16vmax; background: var(--band-glow-2); }
+.band > * { position: relative; z-index: 1; }
+.band .section-head h2 { color: var(--band-text); }
+.band .section-head p { color: var(--band-muted); }
+
+.band .glass {
+  background: var(--band-card);
+  border-color: var(--band-card-border);
+  box-shadow: var(--band-card-shadow);
+}
+.band .featured p, .band .meta { color: var(--band-soft); }
+.band .tag { color: var(--band-muted); background: var(--band-tag-bg); }
+.band .play { color: var(--band-play-text); background: var(--band-play); box-shadow: 0 8px 22px -6px var(--band-play-shadow); }
+.band .play:hover { background: var(--band-play-hover); }
+.band .wave span { background: var(--band-bar); }
+.band .wave span.played { background: var(--band-bar-played); }
+.band .chip { color: var(--band-text); background: var(--band-chip-bg); border-color: var(--band-chip-border); }
+.band .chip:hover { border-color: var(--band-text); }
+.band .chip[aria-pressed="true"] { background: var(--band-chip-on-bg); color: var(--band-chip-on-text); border-color: var(--band-chip-on-bg); }
+.band .card.is-playing, .band .featured.is-playing {
+  border-color: var(--band-bar-played);
+  box-shadow: 0 0 0 1px var(--band-bar-played), 0 18px 40px -16px var(--band-play-shadow);
+}
+.band :focus-visible { outline-color: var(--band-bar-played); }
+
+/* ============ About ============ */
+.about { display: grid; gap: clamp(28px, 5vw, 56px); align-items: center; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .about { grid-template-columns: 0.85fr 1.15fr; } }
+/* Circle frame; the cutout photo sits on a brand-pink gradient */
+.about-photo {
+  position: relative; aspect-ratio: 1; max-width: 380px; width: 100%; margin: 0 auto;
+  border-radius: 50%; overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.45), transparent 50%),
+    linear-gradient(180deg, var(--photo-top) 0%, var(--photo-mid) 55%, var(--berry) 105%);
+  box-shadow: 0 0 0 6px #fff, 0 0 0 7px rgba(255, 96, 136, 0.25), 0 30px 60px -24px rgba(255, 96, 136, 0.65);
+}
+.about-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; display: block;
+  transform: scale(1.0); transform-origin: 46% 100%;
+}
+.about-photo .logo-photo { display: none; position: absolute; inset: 0; margin: auto; width: 62%; }
+.about-photo.no-photo img { display: none; }
+.about-photo.no-photo .logo-photo { display: block; }
+.about-copy p { margin: 14px 0 0; }
+.about-copy h2 + p { margin-top: 18px; }
+.about-note { color: var(--note-color); font-style: italic; }
+
+/* ============ Contact ============ */
+/* A bold pink card to end on */
+.contact {
+  text-align: center; color: var(--contact-text);
+  padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 48px); margin: 0 0 clamp(48px, 8vw, 80px);
+  background: var(--contact-bg);
+  border: 0;
+  box-shadow: 0 30px 60px -28px var(--contact-shadow);
+}
+.contact h2 { color: var(--contact-text); }
+.contact p { margin: 12px auto 26px; color: var(--contact-soft); max-width: 40ch; }
+.contact .btn { max-width: 100%; }
+.contact .btn span { overflow: hidden; text-overflow: ellipsis; }
+.contact .btn-primary { background: var(--contact-btn-bg); color: var(--contact-btn-text); box-shadow: 0 10px 24px -10px rgba(30, 35, 40, 0.4); }
+.contact .btn-primary:hover { background: var(--contact-btn-hover); }
+
+/* Socials */
+.socials { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--contact-line); }
+.socials .socials-label { margin: 0 auto 12px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--contact-soft); }
+.contact .social-links a { color: var(--contact-text); background: var(--contact-chip-bg); border-color: var(--contact-chip-border); }
+.contact .social-links a:hover { color: var(--contact-text); background: var(--contact-chip-bg); border-color: var(--contact-text); }
+.social-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.social-links a {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 999px;
+  color: var(--evergreen); text-decoration: none; font-weight: 600;
+  background: var(--glass); border: 1px solid rgba(74, 117, 112, 0.22);
+  transition: border-color .15s ease, color .15s ease, transform .15s ease;
+}
+.social-links a:hover { color: var(--berry); border-color: var(--berry); transform: translateY(-1px); }
+.social-links svg { width: 20px; height: 20px; fill: currentColor; }
+.social-links-icons a { padding: 8px; border: 0; background: none; }
+
+/* ============ Footer ============ */
+.site-footer {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
+  padding: 28px 16px 36px; color: var(--ink-soft); font-size: 0.88rem; text-align: center;
+}
+.site-footer p { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}

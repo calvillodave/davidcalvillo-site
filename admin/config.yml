@@ -1,0 +1,60 @@
+# Site editor settings (Sveltia CMS). Open yoursite.com/admin to use it.
+
+backend:
+  name: github
+  repo: calvillodave/davidcalvillo-site
+  branch: main
+
+# Uploaded audio goes into the samples folder, and the site links to it as samples/your-file.mp3
+media_folder: samples
+public_folder: samples
+
+collections:
+  - name: website
+    label: Website
+    files:
+      - name: samples
+        label: Voice samples
+        file: content/samples.json
+        fields:
+          - label: Featured sample (the big player at the top)
+            name: featured
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Short description, name: description, widget: string, required: false }
+              - { label: Category, name: category, widget: string, required: false }
+              - { label: Audio file (MP3 or M4A), name: file, widget: file }
+
+          - label: Samples
+            label_singular: Sample
+            name: samples
+            widget: list
+            hint: Drag to reorder. The order here is the order on the site.
+            summary: "{{fields.title}} · {{fields.category}}"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - label: Category (becomes a filter button)
+                name: category
+                widget: select
+                options: [Commercial, Narration, Animation, Español, Video Games, Audiobook, E-Learning, Promo]
+              - { label: Audio file (MP3 or M4A), name: file, widget: file }
+
+      - name: settings
+        label: Contact & socials
+        file: content/settings.json
+        fields:
+          - { label: Email for bookings, name: email, widget: string }
+          - { label: Location, name: location, widget: string }
+          - label: Socials
+            label_singular: Social link
+            name: socials
+            widget: list
+            summary: "{{fields.name}} · {{fields.handle}}"
+            fields:
+              - label: Platform
+                name: name
+                widget: select
+                options: [Instagram, TikTok, YouTube, X, LinkedIn, Threads, Bluesky, Website]
+              - { label: Handle, name: handle, widget: string, hint: "e.g. @imdavidcalvillo" }
+              - { label: Link, name: url, widget: string, hint: "The full address, starting with https://" }
