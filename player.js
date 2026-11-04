@@ -3,7 +3,11 @@
 
   // Content lives in content/*.json so the /admin editor can change it.
   const loadJSON = file => fetch(file, { cache: "no-cache" }).then(r => r.json());
-  const [SITE, content] = await Promise.all([loadJSON("content/settings.json"), loadJSON("content/samples.json")]);
+  const [SITE, content, work] = await Promise.all([
+    loadJSON("content/settings.json"),
+    loadJSON("content/samples.json"),
+    loadJSON("content/work.json").catch(() => ({ items: [] })),
+  ]);
   const samples = content.samples || [];
   const featured = content.featured && content.featured.file ? content.featured : null;
 
@@ -205,4 +209,59 @@
     });
     filters.appendChild(b);
   });
+
+  // ---------- Past work ----------
+  // YouTube link -> { id, start } from watch?v=, youtu.be/, /shorts/ or /embed/ links, with t=1m20s or t=80
+  function parseYouTube(url) {
+    try {
+      const u = new URL(url);
+      const id = u.searchParams.get("v") || u.pathname.split("/").filter(Boolean).pop();
+      const t = u.searchParams.get("t") || u.searchParams.get("start") || "";
+      const m = t.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?$/) || [];
+      const start = (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0);
+      return /^[\w-]{11}$/.test(id) ? { id, start } : null;
+    } catch { return null; }
+  }
+
+  const workGrid = document.getElementById("work-grid");
+  const workItems = (work.items || []).filter(w => (w.type === "youtube" ? parseYouTube(w.youtube) : w.video));
+  if (!workItems.length) document.getElementById("work")?.remove();
+
+  workItems.forEach(w => {
+    const li = document.createElement("li");
+    li.className = "work-item glass";
+    const text = `<div class="work-text"><h3>${esc(w.title)}</h3>${w.subtitle ? `<p>${esc(w.subtitle)}</p>` : ""}</div>`;
+
+    if (w.type === "youtube") {
+      // Show a thumbnail first; the YouTube player only loads when someone presses play.
+      const { id, start } = parseYouTube(w.youtube);
+      li.classList.add("wide");
+      li.innerHTML = `
+        <button class="work-media yt" type="button" aria-label="Play video: ${esc(w.title)}">
+          <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy">
+          <span class="yt-play" aria-hidden="true">${icons}</span>
+        </button>${text}`;
+      li.querySelector(".yt").addEventListener("click", e => {
+        audio.pause();
+        const frame = document.createElement("iframe");
+        frame.className = "work-media";
+        frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0${start ? `&start=${start}` : ""}`;
+        frame.title = w.title;
+        frame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        frame.allowFullscreen = true;
+        e.currentTarget.replaceWith(frame);
+      });
+    } else {
+      li.classList.add("tall");
+      li.innerHTML = `
+        <video class="work-media" controls playsinline preload="none"${w.poster ? ` poster="${esc(w.poster)}"` : ""}>
+          <source src="${esc(w.video)}" type="video/mp4">
+        </video>${text}`;
+      li.querySelector("video").addEventListener("play", () => audio.pause());
+    }
+    workGrid.appendChild(li);
+  });
+
+  // Starting a voice sample pauses any past-work video that's playing.
+  audio.addEventListener("play", () => workGrid?.querySelectorAll("video").forEach(v => v.pause()));
 })();

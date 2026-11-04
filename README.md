@@ -6,6 +6,8 @@
 - `player.js` — the sample player
 - `content/samples.json` — your voice samples (edit through `/admin`)
 - `content/settings.json` — email, location and socials (edit through `/admin`)
+- `content/work.json` — the Past work section (edit through `/admin`)
+- `videos/` — uploaded videos and their cover images
 - `samples/` — your audio files
 - `images/` — logo and headshot
 - `admin/` — the site editor (Sveltia CMS)
@@ -40,6 +42,11 @@
    - **Remove:** delete a sample from the list. To also delete its audio file, remove it under **Assets**.
    - **Featured sample:** the longer narration piece at the top of the Listen section.
 3. Click **Save**. The editor commits the change to GitHub, and the live site updates within a couple of minutes.
+
+**Past work** (same editor) holds your projects:
+- **YouTube:** choose *YouTube link* and paste the address. Adding `&t=46s` to the end makes it start at 0:46.
+- **Your own video:** choose *Uploaded video*, upload an MP4 and, optionally, a cover image. Keep videos under about 25 MB;
+  phone videos are often 60 MB or more, so export a smaller copy first (on a Mac: open in QuickTime → File → Export As → 720p).
 
 **Contact & socials** (same editor) holds your booking email, location and social links.
 Each social link gets a button in the Contact section and an icon in the footer.

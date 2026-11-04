@@ -24,7 +24,7 @@ collections:
               - { label: Title, name: title, widget: string }
               - { label: Short description, name: description, widget: string, required: false }
               - { label: Category, name: category, widget: string, required: false }
-              - { label: Audio file (MP3 or M4A), name: file, widget: file }
+              - { label: Audio file (MP3 or M4A), name: file, widget: file, accept: "audio/*,.mp3,.m4a" }
 
           - label: Samples
             label_singular: Sample
@@ -38,7 +38,43 @@ collections:
                 name: category
                 widget: select
                 options: [Commercial, Narration, Animation, Español, Video Games, Audiobook, E-Learning, Promo]
-              - { label: Audio file (MP3 or M4A), name: file, widget: file }
+              - { label: Audio file (MP3 or M4A), name: file, widget: file, accept: "audio/*,.mp3,.m4a" }
+
+      - name: work
+        label: Past work
+        file: content/work.json
+        fields:
+          - label: Projects
+            label_singular: Project
+            name: items
+            widget: list
+            hint: Drag to reorder. YouTube videos show wide; uploaded vertical videos sit beside them.
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Subtitle, name: subtitle, widget: string, required: false, hint: "e.g. True crime narration · Criminal Collapse" }
+              - label: Type
+                name: type
+                widget: select
+                options:
+                  - { label: YouTube link, value: youtube }
+                  - { label: Uploaded video, value: video }
+                default: youtube
+              - { label: YouTube link, name: youtube, widget: string, required: false, hint: "Paste the YouTube address. A &t=46s on the end makes it start at that time." }
+              - label: Video file (MP4), only for uploaded videos
+                name: video
+                widget: file
+                required: false
+                accept: "video/mp4,.mp4"
+                media_folder: /videos
+                public_folder: videos
+                hint: Keep it under about 25 MB. Phone videos are often much bigger, so export a smaller copy first.
+              - label: Cover image, only for uploaded videos
+                name: poster
+                widget: image
+                required: false
+                media_folder: /videos
+                public_folder: videos
 
       - name: settings
         label: Contact & socials
