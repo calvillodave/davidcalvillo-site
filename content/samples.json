@@ -15,6 +15,11 @@
       "title": "Bookstore Ad",
       "category": "Commercial",
       "file": "/samples/Samples/David_Calvillo_Barnes_And_Noble.m4a"
+    },
+    {
+      "title": "The Trickster",
+      "category": "Video Games",
+      "file": "/samples/Samples/David_Calvillo_Trickster.mp3"
     }
   ]
 }
