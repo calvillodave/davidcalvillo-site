@@ -1,85 +1,25 @@
 {
   "featured": {
-    "title": "Long-form narration",
-    "description": "True crime cold open: calm, clear, and human.",
-    "category": "Narration",
-    "file": "samples/narration-featured.m4a"
+    "title": "Anime Hero",
+    "description": "Hero's Last Stand",
+    "category": "Animation",
+    "file": "/samples/Samples/David_Calvillo_Anime_Hero.mp3"
   },
   "samples": [
     {
-      "title": "Wellness app",
+      "title": "Counseling & Therapy Ad",
       "category": "Commercial",
-      "file": "samples/commercial-wellness.m4a"
+      "file": "/samples/Samples/David_Calvillo_MindSpring_Therapy.m4a"
     },
     {
-      "title": "Tech explainer",
+      "title": "Bookstore Ad",
       "category": "Commercial",
-      "file": "samples/commercial-tech.m4a"
+      "file": "/samples/Samples/David_Calvillo_Barnes_And_Noble.m4a"
     },
     {
-      "title": "Neighborhood coffee",
-      "category": "Commercial",
-      "file": "samples/commercial-coffee.m4a"
-    },
-    {
-      "title": "Nonprofit PSA",
-      "category": "Commercial",
-      "file": "samples/commercial-psa.m4a"
-    },
-    {
-      "title": "True crime",
-      "category": "Narration",
-      "file": "samples/narration-true-crime.m4a"
-    },
-    {
-      "title": "Nature documentary",
-      "category": "Narration",
-      "file": "samples/narration-nature.m4a"
-    },
-    {
-      "title": "Healthcare e-learning",
-      "category": "Narration",
-      "file": "samples/narration-elearning.m4a"
-    },
-    {
-      "title": "Audiobook excerpt",
-      "category": "Narration",
-      "file": "samples/narration-audiobook.m4a"
-    },
-    {
-      "title": "The best friend",
-      "category": "Animation",
-      "file": "samples/animation-best-friend.m4a"
-    },
-    {
-      "title": "Big-brother pep talk",
-      "category": "Animation",
-      "file": "samples/animation-big-brother.m4a"
-    },
-    {
-      "title": "The quiet healer",
-      "category": "Animation",
-      "file": "samples/animation-healer.m4a"
-    },
-    {
-      "title": "Emo rival",
-      "category": "Animation",
-      "file": "samples/animation-emo-rival.m4a"
-    },
-    {
-      "title": "Curious scientist",
-      "category": "Animation",
-      "file": "samples/animation-scientist.m4a"
-    },
-    {
-      "title": "Game tutorial guide",
-      "category": "Animation",
-      "file": "samples/animation-game-guide.m4a"
-    },
-    {
-      "title": "Salud y bienestar",
-      "category": "Español",
-      "file": "samples/espanol-bienestar.m4a"
+      "title": "The Trickster",
+      "category": "Video Games",
+      "file": "/samples/Samples/David_Calvillo_Trickster.mp3"
     }
   ]
 }
