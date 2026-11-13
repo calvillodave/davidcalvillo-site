@@ -7,6 +7,16 @@
   },
   "samples": [
     {
+      "title": "Narration Demo - YouTube",
+      "category": "Narration",
+      "file": "/samples/David_Calvillo_Narration_Demo_YouTube.mp3"
+    },
+    {
+      "title": "Narration Demo - Audiobooks",
+      "category": "Audiobook",
+      "file": "/samples/David_Calvillo_Narration_Demo_Audiobooks.mp3"
+    },
+    {
       "title": "Counseling & Therapy Ad",
       "category": "Commercial",
       "file": "/samples/Samples/David_Calvillo_MindSpring_Therapy.m4a"
@@ -20,16 +30,6 @@
       "title": "The Trickster",
       "category": "Video Games",
       "file": "/samples/Samples/David_Calvillo_Trickster.mp3"
-    },
-    {
-      "title": "Narration Demo - Audiobooks",
-      "category": "Audiobook",
-      "file": "/samples/David_Calvillo_Narration_Demo_Audiobooks.mp3"
-    },
-    {
-      "title": "Narration Demo - YouTube",
-      "category": "Narration",
-      "file": "/samples/David_Calvillo_Narration_Demo_YouTube.mp3"
     }
   ]
 }
