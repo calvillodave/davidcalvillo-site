@@ -20,6 +20,16 @@
       "title": "The Trickster",
       "category": "Video Games",
       "file": "/samples/Samples/David_Calvillo_Trickster.mp3"
+    },
+    {
+      "title": "Narration Demo - Audiobooks",
+      "category": "Audiobook",
+      "file": "/samples/David_Calvillo_Narration_Demo_Audiobooks.mp3"
+    },
+    {
+      "title": "Narration Demo - YouTube",
+      "category": "Narration",
+      "file": "/samples/David_Calvillo_Narration_Demo_YouTube.mp3"
     }
   ]
 }
